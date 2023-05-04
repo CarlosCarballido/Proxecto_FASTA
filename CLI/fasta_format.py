@@ -1,7 +1,6 @@
 import sys
 from core.fasta import secToTXT
 from CLI.argsparser import parseArgs
-import time
 
 if __name__ == '__main__':
     #secToTXT("test_3.fasta", "datos11111.txt", "lower", 3)
@@ -11,6 +10,26 @@ if __name__ == '__main__':
     # $Env:PYTHONPATH = "C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA"
 
     args = parseArgs(sys.argv[1:])
+
+    if len(args.items()) < 2:
+        print("ERROR: Numero de parametros insuficiente.\nEs necesario introducir --input, --output y --mode")
+        sys.exit(1)
+    if len(args.items()) > 4:
+        print("ERROR: Numero de parametros excesivo.\nEs necesario introducir --input, --output y --mode")
+        sys.exit(1)
+        
+    if type(args["maxLength"]) != int:
+        print("ERROR: El parametro --maxLength no es un entero")
+
+    if "input" not in args:
+        print("ERROR: Es necesario introducir el parametro --input")
+        sys.exit(1)
+    
+    if "output" not in args:
+        print("ERROR: Es necesario introducir el parametro --output")
+        sys.exit(1)
+    
+    
     if "case" in args and "maxLength" in args:
         secToTXT(args["input"], args["output"], args["case"], int(args["maxLength"]))
     elif "case" in args:
