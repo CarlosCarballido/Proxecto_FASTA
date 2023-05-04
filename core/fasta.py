@@ -70,9 +70,6 @@ def comprobarMaxLength(maxLength):
     
     if maxLength < 0:
         raise ValueError("ERROR: el parametro --maxLength tiene que ser mayor o igual que 0")
-    
-    if type(args["maxLength"]) != int:
-        print("ERROR: El parametro --maxLength no es un entero")
         
 # Introducir ruta a archivos
 def secToTXT(nombreFasta, nombreArchivo, case = "default", maxLength = 0):

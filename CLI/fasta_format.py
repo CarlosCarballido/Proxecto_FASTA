@@ -17,9 +17,6 @@ if __name__ == '__main__':
     if len(args.items()) > 4:
         print("ERROR: Numero de parametros excesivo.\nEs necesario introducir --input, --output y --mode")
         sys.exit(1)
-        
-    if type(args["maxLength"]) != int:
-        print("ERROR: El parametro --maxLength no es un entero")
 
     if "input" not in args:
         print("ERROR: Es necesario introducir el parametro --input")

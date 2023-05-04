@@ -50,10 +50,10 @@ def imprimirFastaMod(fasta):
         
 def formateador(seq, case = "default", maxLength = 0):
     x = seq
-    if case == "mayuscula":
+    if case == "upper":
         x.secuencia = x.secuencia.upper()
 
-    elif case == "minuscula":
+    elif case == "lower":
         x.secuencia = x.secuencia.lower()
 
     if maxLength != 0:    
@@ -68,6 +68,7 @@ def formateador(seq, case = "default", maxLength = 0):
             if i < len(seq.secuencia)-1:
                 cadenaSeq += "\n"
             i += maxLength
+        
         return ">" + x.identificador + "\n" + cadenaSeq
     return ">" + x.identificador + "\n" + x.secuencia
 
@@ -95,9 +96,9 @@ if __name__ == '__main__':
     #C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe Ejer5.py --input=test_4.fasta --output=datosEjer5.txt --case=lower --maxLength=0
 
     args = argsparser.parseArgs(sys.argv[1:])
-    if args["case"] and args["maxLength"]:
+    if "case" in args.keys() and "maxLength" in args.keys():
         secToTXT(args["input"], args["output"], args["case"], int(args["maxLength"]))
-    elif args["case"]:
+    elif "case" in args.keys():
         secToTXT(args["input"], args["output"], args["case"])
-    elif args["maxLength"]:
+    elif "maxLength" in args.keys():
         secToTXT(args["input"], args["output"], "default", int(args["maxLength"]))

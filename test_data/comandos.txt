@@ -1,1 +1,4 @@
 C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe Ejer5.py --input=test_4.fasta --output=datosEjer5.txt --case=minuscula --maxLength=0
+
+C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe .\disambiguate.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\test_data\test_3.fasta --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\core\datosEjer8.txt --mode=remove
+$Env:PYTHONPATH = "C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA"

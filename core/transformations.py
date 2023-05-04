@@ -42,12 +42,13 @@ if __name__ == "__main__":
     
     
     
+    print("\nLista sin duplicados:\n")
     listaSinDuplicados = ignorarDuplicados(listaFasta)
     
     for i in range(0, len(listaSinDuplicados)):
         print(listaSinDuplicados[i])
     
-    
+    print("\n\n\nLista Renombrada:\n")
     listaRenombrada = renombrar(listaFasta)
     
     for i in range(0, len(listaRenombrada)):
