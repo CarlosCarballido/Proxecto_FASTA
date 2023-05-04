@@ -1,0 +1,1 @@
+C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe Ejer5.py --input=test_4.fasta --output=datosEjer5.txt --case=minuscula --maxLength=0
