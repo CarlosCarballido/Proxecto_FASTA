@@ -6,5 +6,5 @@ class Secuencia():
         self.secuencia = secuencia
         
     def __str__(self):
-        cadena = ">" + self.identificador + "\n" + self.secuencia
+        cadena = self.identificador + "\n" + self.secuencia
         return cadena

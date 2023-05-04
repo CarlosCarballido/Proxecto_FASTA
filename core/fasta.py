@@ -69,3 +69,8 @@ def secToTXT(nombreFasta, nombreArchivo, case = "default", maxLength = 0):
     with open(nombreArchivo, "wt") as f:
         for seq in leerFasta(nombreFasta):
             f.write(formateador(seq, case, maxLength)+"\n")
+
+def listaSecToTXT(listaFasta, nombreArchivo, case = "default", maxLength = 0):
+    with open(nombreArchivo, "wt") as f:
+        for seq in listaFasta:
+            f.write(formateador(seq, case, maxLength)+"\n")
