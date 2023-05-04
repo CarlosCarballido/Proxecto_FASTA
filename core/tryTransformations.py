@@ -1,41 +1,52 @@
 from core.fasta import leerFasta
 
 def renombrar(listaSeq):   
-
-    # Introduce en el la lista "S1.0"
-    for i in range(0, len(listaSeq)):
-        contador = 0
-        if listaSeq.count(listaSeq[i].identificador)-1 != 0:
-            listaSeq[i] = listaSeq[i].identificador + "." + str(contador)
-            break
-        else:
+    diccionario = {}
+    for objeto in listaSeq:
+        contador = 1
+        identificador = objeto.identificador
+        if identificador in diccionario:
+            diccionario[identificador].append(objeto)
             contador += 1
+            print("if")
+        else:
+            diccionario[identificador] = [objeto.identificador + "." + str(contador)]
+            print("else")
+        contador = 0
 
-    return listaSeq
+    # Nueva lista con un objeto por identificador
+    nueva_lista = []
+    for identificador, listaSeq in diccionario.items():
+        nueva_lista.append(listaSeq[0])
+    
+    return nueva_lista
 
 def ignorarDuplicados(listaSeq):
-    nuevaLista = []
-    
-    for seq in range(0, len(listaSeq)):
         #introducir nuevo bucle que compruebe con listaSeq[seq].identificador == nuevaLista[i].identificador en la nueva lista
-        if listaSeq[seq].identificador not in nuevaLista:
-            nuevaLista.append(listaSeq[seq])
+    diccionario = {}
+    for objeto in listaSeq:
+        identificador = objeto.identificador
+        if identificador in diccionario:
+            diccionario[identificador].append(objeto)
+        else:
+            diccionario[identificador] = [objeto]
+
+    # Nueva lista con un objeto por identificador
+    nueva_lista = []
+    for identificador, listaSeq in diccionario.items():
+        nueva_lista.append(listaSeq[0])
     
-    for j in range(0, len(nuevaLista)):
-        print(nuevaLista[j])
-    return nuevaLista
+    return nueva_lista
 
 if __name__ == "__main__":
     listaFasta = leerFasta("c:/Users/ACER/Documents/IA/Programacion_II/Proyecto/Proxecto_FASTA/test_data/test_3.fasta")
     
-    #listaRenombrada = renombrar(listaFasta)
+    listaRenombrada = renombrar(listaFasta)
     
     for i in range(0, len(listaFasta)):
-        pass
-        #print(listaFasta[i])
+        print(listaFasta[i])
         
-    listaSinDuplicados = ignorarDuplicados(listaFasta)
+    #listaSinDuplicados = ignorarDuplicados(listaFasta)
     
-    for i in range(0, len(listaSinDuplicados)):
-        #print(listaSinDuplicados[i])
-        passdd
+    #for i in range(0, len(listaSinDuplicados)):
+    #    print(listaSinDuplicados[i])

@@ -3,7 +3,7 @@ a
 c
 t
 g
->S1.1
+>S1
 c
 c
 t
@@ -23,12 +23,12 @@ g
 g
 g
 a
->S4.1
+>S4
 a
 g
 g
 g
->S4.2
+>S4
 a
 g
 g
