@@ -1,9 +1,7 @@
 import sys
-from core.fasta import listaSecToTXT
+from core.fasta import listaSecToTXT, leerFasta
 from CLI.argsparser import parseArgs
 import time
-from core.fasta import leerFasta
-from core.fasta import leerFasta
 from core.sequences import Secuencia
 
 if __name__ == '__main__':
