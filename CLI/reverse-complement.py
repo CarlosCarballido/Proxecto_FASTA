@@ -1,7 +1,9 @@
-from core.transformations import invertir, complementario, invertirLista, complementearioLista
-from core.fasta import listaSecToTXT, leerFasta
-from argsparser import parseArgs
 import sys
+from CLI.argsparser import parseArgs
+from core.script_utils import apply_transformation
+from core.fasta import listaSecToTXT, leerFasta
+from core.transformations import invertirLista, complementearioLista
+from argsparser import parseArgs
 
 # reverse-complement.py –-input=/path/to/input.fasta –-output=/path/to/output.fasta --mode=invertir/complementario
 #C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe reverse-complement.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\test_data\test_3.fasta --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\core\datosEjer10.txt --mode=invertir
@@ -29,11 +31,18 @@ if __name__ == "__main__":
         sys.exit(1)
         
     
-    if args["mode"] == "invertir":
-        a = leerFasta(args["input"])
-        for i in invertirLista(a):
-            print(">" + i.identificador + "\n" + i.secuencia)
+    input_file = args["input"]
+    output_file = args["output"]
+    mode = args["mode"]
+    
+    lista_secuencias = leerFasta(input_file)
+    
+    if mode == "invertir":
+        transformed_list = invertirLista(lista_secuencias)
+    elif mode == "complementario":
+        transformed_list = complementearioLista(lista_secuencias)
     else:
-        a = leerFasta(args["input"])
-        for i in complementearioLista(a):
-            print(">" + i.identificador + "\n" + i.secuencia)
+        print("ERROR: Transformación no válida")
+        sys.exit(1)
+    
+    listaSecToTXT(transformed_list, output_file)

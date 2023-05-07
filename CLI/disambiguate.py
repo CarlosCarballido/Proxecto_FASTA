@@ -1,8 +1,7 @@
 import sys
-from core.fasta import listaSecToTXT, leerFasta
 from CLI.argsparser import parseArgs
-import time
-from core.sequences import Secuencia
+from core.script_utils import apply_transformation
+
 
 if __name__ == '__main__':
     #secToTXT("test_3.fasta", "datos11111.txt", "lower", 3)
@@ -32,9 +31,9 @@ if __name__ == '__main__':
         print("Es necesario introducir el parametro --mode")
         sys.exit(1)
 
-    if args["mode"] == "rename":
-        listaSecToTXT(renombrar(leerFasta(args["input"])), args["output"])
-        
-    elif args["mode"] == "remove":
-        listaSecToTXT(ignorarDuplicados(leerFasta(args["input"])), args["output"])
+    input_file = args["input"]
+    output_file = args["output"]
+    transformation = args["mode"]
+    
+    apply_transformation(input_file, output_file, transformation)
     #C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe fasta_format.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\test_data\test_3.fasta --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\core\datosEjer7.txt --case=lower --maxLength=0
