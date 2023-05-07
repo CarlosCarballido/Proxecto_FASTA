@@ -6,34 +6,6 @@ from core.fasta import leerFasta
 from core.fasta import leerFasta
 from core.sequences import Secuencia
 
-def renombrar(listaSeq):
-    nueva_lista = []
-    diccionario = {}
-    for seq in listaSeq:
-        if seq.identificador in diccionario:
-            diccionario[seq.identificador] += 1
-            nuevo_id = f"{seq.identificador}.{diccionario[seq.identificador]}"
-            seq.identificador = nuevo_id
-            nueva_lista.append(seq)
-        else:
-            diccionario[seq.identificador] = 1
-            nuevo_id = f"{seq.identificador}.{diccionario[seq.identificador]}"
-            seq.identificador = nuevo_id
-            nueva_lista.append(seq)
-    return nueva_lista
-
-def ignorarDuplicados(listaSeq):
-    diccionario = {}
-    for seq in listaSeq:
-
-        if seq.identificador not in diccionario:
-            diccionario[seq.identificador] = [seq]
-
-    # Nueva lista con un objeto por seq.identificador
-    nueva_lista = [listaSeq[0] for listaSeq in diccionario.values()]
-    
-    return nueva_lista
-
 if __name__ == '__main__':
     #secToTXT("test_3.fasta", "datos11111.txt", "lower", 3)
      

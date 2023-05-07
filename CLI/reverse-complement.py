@@ -1,7 +1,10 @@
-from core.fasta import invertir
-from core.fasta import complementario
+from core.transformations import invertir, complementario, invertirLista, complementearioLista
+from core.fasta import listaSecToTXT, leerFasta
+from argsparser import parseArgs
+import sys
 
 # reverse-complement.py –-input=/path/to/input.fasta –-output=/path/to/output.fasta --mode=invertir/complementario
+#C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe reverse-complement.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\test_data\test_3.fasta --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\core\datosEjer10.txt --mode=invertir
 
 if __name__ == "__main__":
     
@@ -25,7 +28,12 @@ if __name__ == "__main__":
         print("ERROR: Es necesario introducir el parametro --output")
         sys.exit(1)
         
+    
     if args["mode"] == "invertir":
-        pass
+        a = leerFasta(args["input"])
+        for i in invertirLista(a):
+            print(">" + i.identificador + "\n" + i.secuencia)
     else:
-        pass
+        a = leerFasta(args["input"])
+        for i in complementearioLista(a):
+            print(">" + i.identificador + "\n" + i.secuencia)

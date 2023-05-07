@@ -94,7 +94,8 @@ if __name__ == '__main__':
      
     #Ejer5.py –-input=test_4.fasta –-output=datosEjer5.txt -–case=lower --maxLength=0
     #C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe Ejer5.py --input=test_4.fasta --output=datosEjer5.txt --case=lower --maxLength=0
-
+    #$Env:PYTHONPATH = "C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA"
+    
     args = argsparser.parseArgs(sys.argv[1:])
     if "case" in args.keys() and "maxLength" in args.keys():
         secToTXT(args["input"], args["output"], args["case"], int(args["maxLength"]))
