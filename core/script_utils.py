@@ -8,9 +8,9 @@ def apply_transformation(input_file, output_file, transformation):
         transformed_list = renombrar(lista_secuencias)
     elif transformation == "remove":
         transformed_list = ignorarDuplicados(lista_secuencias)
-    elif transformation == "invert":
+    elif transformation == "invertir":
         transformed_list = invertirLista(lista_secuencias)
-    elif transformation == "complement":
+    elif transformation == "complementario":
         transformed_list = complementearioLista(lista_secuencias)
     else:
         print("ERROR: Transformación no válida.")

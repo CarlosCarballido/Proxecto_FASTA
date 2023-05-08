@@ -30,19 +30,8 @@ if __name__ == "__main__":
         print("ERROR: Es necesario introducir el parametro --output")
         sys.exit(1)
         
-    
     input_file = args["input"]
     output_file = args["output"]
-    mode = args["mode"]
+    transformation = args["mode"]
     
-    lista_secuencias = leerFasta(input_file)
-    
-    if mode == "invertir":
-        transformed_list = invertirLista(lista_secuencias)
-    elif mode == "complementario":
-        transformed_list = complementearioLista(lista_secuencias)
-    else:
-        print("ERROR: Transformación no válida")
-        sys.exit(1)
-    
-    listaSecToTXT(transformed_list, output_file)
+    apply_transformation(input_file, output_file, transformation)

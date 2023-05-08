@@ -1,0 +1,8 @@
+>S1
+ACTG
+>S2
+ATTT
+>S3
+TAAA
+>S4
+GGGA
