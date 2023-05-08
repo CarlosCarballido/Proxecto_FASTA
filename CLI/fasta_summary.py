@@ -1,9 +1,10 @@
 import sys
+import os
 from argsparser import parseArgs
 from sequence_stats import calculate_sequence_list_statistics, save_statistics_to_csv
 from core.fasta import leerFasta
 
-#C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe fasta_summary.py  --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\test_data\test_3.fasta --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\core\datosEjer12.csv
+# C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe fasta_summary.py  --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\test_data\test_3.fasta --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\core\datosEjer12.csv
 
 if __name__ == '__main__':
     args = parseArgs(sys.argv[1:])
@@ -20,9 +21,36 @@ if __name__ == '__main__':
         print("ERROR: Debes proporcionar el parámetro --output")
         sys.exit(1)
 
-    input_file = args["input"]
-    output_file = args["output"]
+    input_path = args["input"]
+    output_path = args["output"]
 
-    sequence_list = leerFasta(input_file)
-    statistics = calculate_sequence_list_statistics(sequence_list)
-    save_statistics_to_csv(statistics, output_file)
+    if os.path.isdir(input_path):
+        for file_name in os.listdir(input_path):
+            if file_name.endswith(".fasta"):
+                input_file = os.path.join(input_path, file_name)
+                output_file = os.path.join(
+                    output_path, f"{os.path.splitext(file_name)[0]}.csv")
+
+                sequence_list = leerFasta(input_file)
+                statistics = calculate_sequence_list_statistics(sequence_list)
+                save_statistics_to_csv(statistics, output_file)
+    elif os.path.isfile(input_path):
+        input_file = input_path
+        output_file = os.path.join(
+            output_path, f"{os.path.splitext(os.path.basename(input_file))[0]}.csv")
+
+        sequence_list = leerFasta(input_file)
+        statistics = calculate_sequence_list_statistics(sequence_list)
+        save_statistics_to_csv(statistics, output_file)
+    else:
+        print("ERROR: El parámetro --input debe ser un archivo o un directorio existente")
+        sys.exit(1)
+
+    if "extra-plots-dir" not in args:
+        pass
+    else:
+        extra_plots_dir_path = args["extra-plots-dir"]
+        print(extra_plots_dir_path)
+
+# $Env:PYTHONPATH = "C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA"
+# C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe fasta_summary.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas --extra-plots-dir=
