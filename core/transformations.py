@@ -37,49 +37,17 @@ class SequenceListTransformer:
             transformed_listaSeq = transformation.transform(transformed_listaSeq)
         return transformed_listaSeq
 
-
 def renombrar(listaSeq):
     nueva_lista = []
     diccionario = {}
     for seq in listaSeq:
         if seq.identificador in diccionario:
             diccionario[seq.identificador] += 1
-            nuevo_id = f"{seq.identificador}.{diccionario[seq.identificador]}"
-            seq.identificador = nuevo_id
+            seq.identificador = f"{seq.identificador}.{diccionario[seq.identificador]}"
             nueva_lista.append(seq)
         else:
             diccionario[seq.identificador] = 1
-            nuevo_id = f"{seq.identificador}.{diccionario[seq.identificador]}"
-            seq.identificador = nuevo_id
-            nueva_lista.append(seq)
-    return nueva_lista
-
-
-def ignorarDuplicados(listaSeq):
-    diccionario = {}
-    for seq in listaSeq:
-
-        if seq.identificador not in diccionario:
-            diccionario[seq.identificador] = [seq]
-
-    nueva_lista = [listaSeq[0] for listaSeq in diccionario.values()]
-
-    return nueva_lista
-
-
-def renombrar(listaSeq):
-    nueva_lista = []
-    diccionario = {}
-    for seq in listaSeq:
-        if seq.identificador in diccionario:
-            diccionario[seq.identificador] += 1
-            nuevo_id = f"{seq.identificador}.{diccionario[seq.identificador]}"
-            seq.identificador = nuevo_id
-            nueva_lista.append(seq)
-        else:
-            diccionario[seq.identificador] = 1
-            nuevo_id = f"{seq.identificador}.{diccionario[seq.identificador]}"
-            seq.identificador = nuevo_id
+            seq.identificador = f"{seq.identificador}.{diccionario[seq.identificador]}"
             nueva_lista.append(seq)
     return nueva_lista
 
@@ -195,3 +163,6 @@ if __name__ == "__main__":
     # Imprimir las secuencias transformadas
     for sequence in transformed_listaSeq:
         print(sequence)
+
+# $Env:PYTHONPATH = "C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA"
+# C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe fasta_summary.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas --extra-plots-dir=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas
