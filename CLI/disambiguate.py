@@ -1,7 +1,6 @@
-import sys
 from CLI.argsparser import parseArgs
 from core.script_utils import apply_transformation
-
+import sys
 
 if __name__ == '__main__':
     #secToTXT("test_3.fasta", "datos11111.txt", "lower", 3)

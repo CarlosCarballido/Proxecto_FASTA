@@ -1,6 +1,6 @@
-import sys
 from core.fasta import secToTXT
 from CLI.argsparser import parseArgs
+import sys
 
 if __name__ == '__main__':
     #secToTXT("test_3.fasta", "datos11111.txt", "lower", 3)

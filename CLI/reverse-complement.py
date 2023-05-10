@@ -1,9 +1,9 @@
-import sys
 from CLI.argsparser import parseArgs
 from core.script_utils import apply_transformation
 from core.fasta import listaSecToTXT, leerFasta
 from core.transformations import invertirLista, complementearioLista
 from argsparser import parseArgs
+import sys
 
 # reverse-complement.py –-input=/path/to/input.fasta –-output=/path/to/output.fasta --mode=invertir/complementario
 #C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe reverse-complement.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\test_data\test_3.fasta --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\core\datosEjer10.txt --mode=invertir
