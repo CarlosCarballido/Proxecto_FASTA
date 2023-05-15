@@ -8,5 +8,5 @@ def parseArgs(args):
             toret[name] = argSplit[1]
         else:
             toret[name] = True
-    
+
     return toret

@@ -1,11 +1,26 @@
 from argsparser import parseArgs
-from sequence_stats import calculate_sequence_list_statistics, save_statistics_to_csv
+from sequence_stats import calculate_sequence_list_statistics, save_statistics_to_csv, SequenceStatistics
 from core.fasta import leerFasta
 import matplotlib.pyplot as plt
 import sys
 import os
 
-# C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe fasta_summary.py  --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\test_data\test_3.fasta --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\core\datosEjer12.csv
+def imprimirBarras(lengths,extra_plots_dir_path,input_file):
+    plt.hist(lengths, bins=10)
+    plt.xlabel('Longitud de la secuencia')
+    plt.ylabel('Recuento')
+    plt.title('Distribución de longitudes de las secuencias')
+    plt.savefig(os.path.join(extra_plots_dir_path, f"{os.path.splitext(os.path.basename(input_file))[0]}GraficoBarras.png"))
+    plt.close()
+
+
+def imprimirBoxPlot(lengths,extra_plots_dir_path,file_name):
+    plt.boxplot(lengths)
+    plt.xticks(range(1, 5), ['A', 'C', 'T', 'G'])
+    plt.xlabel('Base')
+    plt.ylabel('Longitud de la secuencia')
+    plt.savefig(os.path.join(extra_plots_dir_path,f"{os.path.splitext(file_name)[0]}BoxPlot.png"))
+    plt.close()
 
 if __name__ == '__main__':
     args = parseArgs(sys.argv[1:])
@@ -32,51 +47,49 @@ if __name__ == '__main__':
         for file_name in os.listdir(input_path):
             if file_name.endswith(".fasta"):
                 input_file = os.path.join(input_path, file_name)
-                output_file = os.path.join(
-                    output_path, f"{os.path.splitext(file_name)[0]}.csv")
+                output_file = os.path.join(output_path, f"{os.path.splitext(file_name)[0]}.csv")
 
                 sequence_list = leerFasta(input_file)
                 statistics = calculate_sequence_list_statistics(sequence_list)
                 save_statistics_to_csv(statistics, output_file)
 
-                # Generar gráfica de barras
                 lengths = [len(seq.secuencia) for seq in sequence_list]
 
-                # Generar gráfica de barras
-                # Utilizar un histograma para mostrar la distribución de longitudes
-                plt.hist(lengths, bins=10)
-                plt.xlabel('Longitud de la secuencia')
-                plt.ylabel('Recuento')
-                plt.title('Distribución de longitudes de las secuencias')
-                plt.savefig(os.path.join(
-                    extra_plots_dir_path, f"{os.path.splitext(os.path.basename(input_file))[0]}.png"))
-                plt.close()
+                imprimirBarras(lengths,extra_plots_dir_path,input_file)
+                
+                lengths_A = [seq.secuencia.count('A')/len(seq.secuencia) for seq in sequence_list]
+                lengths_C = [seq.secuencia.count('C')/len(seq.secuencia) for seq in sequence_list]
+                lengths_T = [seq.secuencia.count('T')/len(seq.secuencia) for seq in sequence_list]
+                lengths_G = [seq.secuencia.count('G')/len(seq.secuencia) for seq in sequence_list]
+                
+                lengths = [lengths_A, lengths_C, lengths_T, lengths_G]
+                
+                imprimirBoxPlot(lengths,extra_plots_dir_path,input_file)
+                
+
 
     elif os.path.isfile(input_path):
         input_file = input_path
-        output_file = os.path.join(
-            output_path, f"{os.path.splitext(os.path.basename(input_file))[0]}.csv")
+        output_file = os.path.join(output_path, f"{os.path.splitext(os.path.basename(input_file))[0]}.csv")
 
         sequence_list = leerFasta(input_file)
         statistics = calculate_sequence_list_statistics(sequence_list)
         save_statistics_to_csv(statistics, output_file)
 
-       # Calcular la longitud de caracteres de cada secuencia
         lengths = [len(seq.secuencia) for seq in sequence_list]
 
-        # Generar gráfica de barras
-        # Utilizar un histograma para mostrar la distribución de longitudes
-        plt.hist(lengths, bins=10)
-        plt.xlabel('Longitud de la secuencia')
-        plt.ylabel('Recuento')
-        plt.title('Distribución de longitudes de las secuencias')
-        plt.savefig(os.path.join(extra_plots_dir_path,
-                    f"{os.path.splitext(file_name)[0]}.png"))
-        plt.close()
+        imprimirBarras(lengths,extra_plots_dir_path,input_file)
+        
+        lengths_A = [seq.secuencia.count('A')/len(seq.secuencia) for seq in sequence_list]
+        lengths_C = [seq.secuencia.count('C')/len(seq.secuencia) for seq in sequence_list]
+        lengths_T = [seq.secuencia.count('T')/len(seq.secuencia) for seq in sequence_list]
+        lengths_G = [seq.secuencia.count('G')/len(seq.secuencia) for seq in sequence_list]
+
+        lengths = [lengths_A, lengths_C, lengths_T, lengths_G]
+
+        imprimirBoxPlot(lengths,extra_plots_dir_path,input_file)
+
 
     else:
         print("ERROR: El parámetro --input debe ser un archivo o un directorio existente")
         sys.exit(1)
-
-# $Env:PYTHONPATH = "C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA"
-# C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe fasta_summary.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas --extra-plots-dir=

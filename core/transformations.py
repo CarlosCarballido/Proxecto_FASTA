@@ -22,8 +22,8 @@ class DuplicatedIdentifiersRenamer(AbstractTransformer):
 
 class ReverseComplement(AbstractTransformer):
     def transform(self, listaSeq):
-        #listaSeq = invertirLista(listaSeq)
-        #listaSeq = complementario(listaSeq)
+        listaSeq = invertirLista(listaSeq)
+        listaSeq = complementearioLista(listaSeq)
         return listaSeq
 
 
@@ -34,8 +34,10 @@ class SequenceListTransformer:
     def apply_transformations(self, listaSeq):
         transformed_listaSeq = listaSeq
         for transformation in self.transformations:
-            transformed_listaSeq = transformation.transform(transformed_listaSeq)
+            transformed_listaSeq = transformation.transform(
+                transformed_listaSeq)
         return transformed_listaSeq
+
 
 def renombrar(listaSeq):
     nueva_lista = []
@@ -89,7 +91,6 @@ def invertirLista(listaSeq):
 def complementario(seq):
     complementos = {"A": "T", "T": "A", "C": "G", "G": "C"}
 
-    # Iteramos sobre cada letra de la cadena y la reemplazamos con su complementaria
     ayudanteComplementario = ""
     for letra in seq.secuencia:
         if letra in complementos.keys():
@@ -97,7 +98,6 @@ def complementario(seq):
 
     seq.secuencia = ayudanteComplementario
 
-    # Devolvemos la cadena complementaria invertida
     return seq.secuencia
 
 
@@ -114,42 +114,40 @@ if __name__ == "__main__":
     """
         Codigo Apartado 8
     """
-    # listaFasta = [
-    #    Secuencia(">S1", "ACTG"),
-    #    Secuencia(">S1", "CCTG"),
-    #    Secuencia(">S2", "DFGH"),
-    #    Secuencia(">S3", "ACTG"),
-    #    Secuencia(">S3", "PJGH"),
-    #    Secuencia(">S4", "ADFF"),
-    #    Secuencia(">S5", "FGHK"),
-    #              ]
-    #
-    #
-    #
-    # print("\nLista sin duplicados:\n")
-    # listaSinDuplicados = ignorarDuplicados(listaFasta)
-    #
-    # for i in range(0, len(listaSinDuplicados)):
-    #    print(listaSinDuplicados[i])
-    #
-    # print("\n\n\nLista Renombrada:\n")
-    # listaRenombrada = renombrar(listaFasta)
-    #
-    # for i in range(0, len(listaRenombrada)):
-    #    print(listaRenombrada[i])
-    #
+    listaFasta = [
+        Secuencia(">S1", "ACTG"),
+        Secuencia(">S1", "CATG"),
+        Secuencia(">S2", "TCTG"),
+        Secuencia(">S3", "CGTG"),
+        Secuencia(">S3", "GGTG"),
+        Secuencia(">S4", "TTTG"),
+        Secuencia(">S5", "CATG"),
+    ]
+
+    print("\nLista sin duplicados:\n")
+    listaSinDuplicados = ignorarDuplicados(listaFasta)
+
+    for i in range(0, len(listaSinDuplicados)):
+        print(listaSinDuplicados[i])
+
+    print("\n\n\nLista Renombrada:\n")
+    listaRenombrada = renombrar(listaFasta)
+
+    for i in range(0, len(listaRenombrada)):
+        print(listaRenombrada[i])
 
     """
     Codigo Apartado 10
     """
+    print("\n\n\nLista Apartado 10:\n")
     listaFasta = [
         Secuencia(">S1", "ACTG"),
-        Secuencia(">S1", "CCTG"),
-        Secuencia(">S2", "DFGH"),
-        Secuencia(">S3", "ACTG"),
-        Secuencia(">S3", "PJGH"),
-        Secuencia(">S4", "ADFF"),
-        Secuencia(">S5", "FGHK"),
+        Secuencia(">S1", "CATG"),
+        Secuencia(">S2", "TCTG"),
+        Secuencia(">S3", "CGTG"),
+        Secuencia(">S3", "GGTG"),
+        Secuencia(">S4", "TTTG"),
+        Secuencia(">S5", "CATG"),
     ]
 
     transformer = SequenceListTransformer([
@@ -160,9 +158,5 @@ if __name__ == "__main__":
 
     transformed_listaSeq = transformer.apply_transformations(listaFasta)
 
-    # Imprimir las secuencias transformadas
     for sequence in transformed_listaSeq:
         print(sequence)
-
-# $Env:PYTHONPATH = "C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA"
-# C:/Users/ACER/AppData/Local/Programs/Python/Python310/python.exe fasta_summary.py --input=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas --output=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas --extra-plots-dir=C:\Users\ACER\Documents\IA\Programacion_II\Proyecto\Proxecto_FASTA\fastas

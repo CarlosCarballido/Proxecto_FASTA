@@ -1,6 +1,7 @@
 from core.sequences import Secuencia
 import csv
 
+
 class SequenceStatistics:
     def __init__(self, sequence):
         self.sequence = sequence

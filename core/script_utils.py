@@ -1,6 +1,7 @@
 from core.fasta import listaSecToTXT, leerFasta
 from core.transformations import renombrar, ignorarDuplicados, invertirLista, complementearioLista
 
+
 def apply_transformation(input_file, output_file, transformation):
     lista_secuencias = leerFasta(input_file)
 
